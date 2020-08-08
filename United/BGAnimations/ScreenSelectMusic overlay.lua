@@ -212,26 +212,4 @@ t[#t + 1] =
     end
   }
 
---[[for i = 1, 600 do
-t[#t+1] =
-  Def.Sprite {
-    Name="wooo" .. tostring(i);
-    Texture=THEME:GetPathG("","beuluu");
-    InitCommand=function(self)
-      self:diffusealpha(0):xy(SCREEN_CENTER_X,SCREEN_CENTER_Y):zoom(math.random(0.1,1))
-    end,
-    OnCommand=function(self)
-      self:sleep(5)
-      self:diffusealpha(1)
-      self:decelerate(math.random(0.5,3))
-      self:addx(math.random(-2000,2000))
-      self:addy(math.random(-2000,2000))
-      self:addrotationy(math.random(0,360))
-      self:accelerate(2)
-      self:addrotationy(9999)
-      self:diffusealpha(0)
-    end
-  }
-end--]]
-
 return t
