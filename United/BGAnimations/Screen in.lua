@@ -4,10 +4,6 @@ return Def.Quad {
 	end,
 	OnCommand = function(self)
 		self:diffuse(color("0,0,0,1")):sleep(0.1):linear(0.1):diffusealpha(0)
-	end,
-	AnimationFinishedCommand = function()
-		lastActiveScreen = SCREENMAN:GetTopScreen():GetName()
-		ms.ok(lastActiveScreen)
 	end
 
 }
