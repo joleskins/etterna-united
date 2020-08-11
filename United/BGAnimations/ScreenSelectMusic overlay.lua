@@ -61,7 +61,7 @@ t[#t + 1] =
 }
 t[#t + 1] =
   Def.Quad {
-  Name="DiffFrameTopNormal";
+  Name="DiffFrameBottomNormal";
   InitCommand = function(self)
     self:xy(91,497):zoomto(111,2):halign(0):valign(0):diffusealpha(0.2)
   end
@@ -119,7 +119,7 @@ t[#t + 1] =
 }
 t[#t + 1] =
   Def.Quad {
-  Name="DiffFrameTopNormal";
+  Name="DiffFrameBottomNormal";
   InitCommand = function(self)
     self:xy(210,497):zoomto(111,2):halign(0):valign(0):diffusealpha(0.2)
   end
@@ -178,7 +178,7 @@ t[#t + 1] =
 }
 t[#t + 1] =
   Def.Quad {
-  Name="DiffFrameTopHard";
+  Name="DiffFrameBottomHard";
   InitCommand = function(self)
     self:xy(329,497):zoomto(111,2):halign(0):valign(0):diffuse(color("#a435c4")):diffusealpha(1)
   end

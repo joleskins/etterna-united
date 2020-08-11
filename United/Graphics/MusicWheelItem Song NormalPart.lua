@@ -16,7 +16,7 @@ t[#t+1] = Def.Sprite {
 				if not bnpath then
 					bnpath = THEME:GetPathG("Common", "fallback banner")
 				end
-				self:LoadBackground(bnpath)
+				self:Load(bnpath)
 				self:zoomto(120,60)
 			end
 		end
