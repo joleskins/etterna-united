@@ -12,7 +12,7 @@ t[#t+1] = Def.Sprite {
 			local song = params.Song
 			local bnpath = nil
 			if song then
-				bnpath = params.Song:GetBackgroundPath()
+				bnpath = params.Song:GetBannerPath()
 				if not bnpath then
 					bnpath = THEME:GetPathG("Common", "fallback banner")
 				end

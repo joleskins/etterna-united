@@ -213,7 +213,8 @@ t[#t + 1] =
       end
   }
 
---MSD Display 
+--MSD Display
+--Hardcoded because getting MSD values is hard
 t[#t + 1] =
   LoadFont("_vikive bold 48px") ..
     {
@@ -275,27 +276,40 @@ t[#t + 1] =
       end
   }
 
---Banner (doesn't work)
-t[#t+1] = Def.Sprite {
+--Banner(but it's actually the background image)
+t[#t + 1] =
+  Def.Sprite {
   Name = "Banner",
-  InitCommand = function(self)
-    self:xy(SCREEN_CENTER_X/2,120)
-  end,
-  SetCommand = function(self)
-    if topScreen:GetName() == "ScreenSelectMusic" or topScreen:GetName() == "ScreenNetSelectMusic" then
-      local bnpath = nil
+    InitCommand = function(self)
+      self:halign(0):valign(0):xy(75,155):scaletoclipped(500,300):diffusealpha(1)
+    end,
+
+    CurrentSongChangedMessageCommand = function(self)
+      if INPUTFILTER:IsBeingPressed("tab") then
+        self:finishtweening():smooth(0.25):diffusealpha(0):sleep(0.2):queuecommand("ModifyBanner")
+      else
+        self:finishtweening():queuecommand("ModifyBanner")
+      end
+    end,
+
+    ModifyBannerCommand = function(self)
+      local song = GAMESTATE:GetCurrentSong()
+      self:finishtweening()
       if song then
-        bnpath = song:GetBannerPath()
-      elseif group then
-        bnpath = SONGMAN:GetSongGroupBannerPath(group)
-      end
-      if not bnpath or bnpath == "" then
+        local bnpath = GAMESTATE:GetCurrentSong():GetBackgroundPath()
+      if not bnpath then
         bnpath = THEME:GetPathG("Common", "fallback banner")
+        end
+        self:LoadBackground(bnpath)
+      else
+        local bnpath = SONGMAN:GetSongGroupBannerPath(SCREENMAN:GetTopScreen():GetMusicWheel():GetSelectedSection())
+          if not bnpath or bnpath == "" then
+            bnpath = THEME:GetPathG("Common", "fallback banner")
+          end
+        self:LoadBackground(bnpath)
       end
-      self:LoadBackground(bnpath)
-      self:zoomto(500,300)
-    end
-  end
+      self:diffusealpha(1)
+    end,
 }
 
 --Screen name text
@@ -312,6 +326,7 @@ t[#t + 1] =
   }
 
 --Pack name text
+--Doesn't update when group is changed. I don't know how to do SetUpdateFunction()
 t[#t + 1] =
   LoadFont("_raleway black 48px") ..
     {
@@ -320,33 +335,16 @@ t[#t + 1] =
       end,
 
       OnCommand=function(self)
-        local whereAreWe = SCREENMAN:GetTopScreen()
-        self:settext("pack name")
+        local song = GAMESTATE:GetCurrentSong()
+        self:settext(song:GetGroupName())
       end
   }
 
---This would be the real clock numbers but the kerning is suuuuuuuuper scuffed and idk how to fix it
+--Clock
+--Moved to its own file which I stole from Til Death because my own clock was throwing errors
+t[#t + 1] = LoadActor("_currenttime")
 
---[[--Clock(numbers)
-t[#t + 1] =
-  LoadFont("_vikive bold 24px") ..
-    {
-      InitCommand=function(self)
-        self:diffusealpha(0.51):halign(1):valign(0):xy(1810,50)
-      end,
-
-      OnCommand=function(self)
-        local whereAreWe = SCREENMAN:GetTopScreen()
-        --Clock update function
-        local function UpdateTime(self)
-            self:GetChild('Time'):settext(string.format("%02i:%02i", Hour(), Minute() ))
-        end
-
-        self:settext("11:11")
-      end
-  }--]]
-
---1
+--[[--1
 t[#t + 1] =
   LoadFont("_vikive bold 24px") ..
     {
@@ -439,21 +437,7 @@ t[#t + 1] =
 
         self:settext("4")
       end
-}
-
---PM
-t[#t + 1] =
-  LoadFont("_raleway black 18px") ..
-    {
-      InitCommand=function(self)
-        self:diffusealpha(0.1):halign(1):valign(0):xy(1840,52)
-      end,
-
-      OnCommand=function(self)
-        local whereAreWe = SCREENMAN:GetTopScreen()
-        self:settext("PM")
-      end
-  }
+}--]]
 
 --Sort bar background
 t[#t + 1] =
