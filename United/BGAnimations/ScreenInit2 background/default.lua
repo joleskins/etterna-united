@@ -40,37 +40,84 @@ t[#t + 1] =
 		LoadActor(THEME:GetPathG("","game iidx")) ..
 			{
 				OnCommand = function(self)
-					self:zoom(1):addy(100):addx(-600):diffusealpha(0):sleep(1.5):linear(0.3):diffusealpha(1):sleep(3):linear(0.3):diffusealpha(0)
+					self:halign(0.5):zoom(1):addy(0):addx(-350):diffusealpha(0):sleep(1.5):linear(0.3):diffusealpha(1):sleep(3):linear(0.3):diffusealpha(0)
 				end
 			},
+		LoadFont("Common Normal") ..
+			{
+				Text = "BEATMANIA IIDX",
+				OnCommand = function(self)
+					self:halign(0.5):zoom(0.75):addy(0):addx(-250):diffusealpha(0):sleep(1.5):linear(0.3):diffusealpha(1):sleep(3):linear(0.3):diffusealpha(0)
+				end
+			},
+
 		LoadActor(THEME:GetPathG("","game ch")) ..
 			{
 				OnCommand = function(self)
-					self:zoom(0.75):addy(100):addx(-300):diffusealpha(0):sleep(1.75):linear(0.3):diffusealpha(1):sleep(2.5):linear(0.3):diffusealpha(0)
+					self:halign(0.5):zoom(1):addy(0):addx(-75):diffusealpha(0):sleep(1.75):linear(0.3):diffusealpha(1):sleep(2.5):linear(0.3):diffusealpha(0)
 				end
 			},
+		LoadFont("Common Normal") ..
+			{
+				Text = "Clone Hero",
+				OnCommand = function(self)
+					self:halign(0.5):zoom(0.75):addy(0):addx(0):diffusealpha(0):sleep(1.75):linear(0.3):diffusealpha(1):sleep(2.5):linear(0.3):diffusealpha(0)
+				end
+			},
+				
 		LoadActor(THEME:GetPathG("","game djmax")) ..
 			{
 				OnCommand = function(self)
-					self:zoom(1):addy(100):addx(-100):diffusealpha(0):sleep(2):linear(0.3):diffusealpha(1):sleep(2):linear(0.3):diffusealpha(0)
+					self:halign(0.5):zoom(1):addy(0):addx(150):diffusealpha(0):sleep(2):linear(0.3):diffusealpha(1):sleep(2):linear(0.3):diffusealpha(0)
 				end
 			},
+		LoadFont("Common Normal") ..
+			{
+				Text = "DJMax Respect V",
+				OnCommand = function(self)
+					self:halign(0.5):zoom(0.75):addy(0):addx(250):diffusealpha(0):sleep(2):linear(0.3):diffusealpha(1):sleep(2):linear(0.3):diffusealpha(0)
+				end
+			},
+				
 		LoadActor(THEME:GetPathG("","game etterna")) ..
 			{
 				OnCommand = function(self)
-					self:zoom(1):addy(100):addx(100):diffusealpha(0):sleep(2.25):linear(0.3):diffusealpha(1):sleep(1.5):linear(0.3):diffusealpha(0)
+					self:halign(0.5):zoom(1):addy(90):addx(-325):diffusealpha(0):sleep(2.25):linear(0.3):diffusealpha(1):sleep(1.5):linear(0.3):diffusealpha(0)
 				end
 			},
+		LoadFont("Common Normal") ..
+			{
+				Text = "Etterna",
+				OnCommand = function(self)
+					self:halign(0.5):zoom(0.75):addy(90):addx(-250):diffusealpha(0):sleep(2.25):linear(0.3):diffusealpha(1):sleep(1.5):linear(0.3):diffusealpha(0)
+				end
+			},
+				
 		LoadActor(THEME:GetPathG("","game osu")) ..
 			{
 				OnCommand = function(self)
-					self:zoom(1):addy(100):addx(300):diffusealpha(0):sleep(2.5):linear(0.3):diffusealpha(1):sleep(1):linear(0.3):diffusealpha(0)
+					self:halign(0.5):zoom(1):addy(90):addx(-50):diffusealpha(0):sleep(2.5):linear(0.3):diffusealpha(1):sleep(1):linear(0.3):diffusealpha(0)
 				end
 			},
+		LoadFont("Common Normal") ..
+			{
+				Text = "osu!",
+				OnCommand = function(self)
+					self:halign(0.5):zoom(0.75):addy(90):addx(0):diffusealpha(0):sleep(2.5):linear(0.3):diffusealpha(1):sleep(1):linear(0.3):diffusealpha(0)
+				end
+			},
+			
 		LoadActor(THEME:GetPathG("","game quaver")) ..
 			{
 				OnCommand = function(self)
-					self:zoom(0.75):addy(100):addx(600):diffusealpha(0):sleep(2.75):linear(0.3):diffusealpha(1):sleep(0.5):linear(0.3):diffusealpha(0)
+					self:halign(0.5):zoom(1):addy(90):addx(175):diffusealpha(0):sleep(2.75):linear(0.3):diffusealpha(1):sleep(0.5):linear(0.3):diffusealpha(0)
+				end
+			},
+		LoadFont("Common Normal") ..
+			{
+				Text = "Quaver",
+				OnCommand = function(self)
+					self:halign(0.5):zoom(0.75):addy(90):addx(250):diffusealpha(0):sleep(2.75):linear(0.3):diffusealpha(1):sleep(0.5):linear(0.3):diffusealpha(0)
 				end
 			}
 	}
