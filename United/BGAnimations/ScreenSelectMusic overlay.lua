@@ -1,6 +1,7 @@
 local t = Def.ActorFrame {}
 
 --Avatar/Profile definitions
+--This is really stupid but I'm going to need the checks in the future
 local theTexture = nil
 
 if theTexture == nil then
@@ -228,9 +229,53 @@ t[#t + 1] =
       end
   }
 
---MSD Display
---Hardcoded because getting MSD values is hard
+--MSD Display. Adapted from Til Death
 t[#t + 1] =
+  Def.ActorFrame {
+    GetMSDCommand = function()
+      local song = GAMESTATE:GetCurrentSong()
+      song:GetMSD(rate, skillsetindex)
+      score = GetDisplayScore()
+    end,
+    CurrentRateChangedMessageCommand = function(self)
+    self:queuecommand("GetMSD") --steps stuff
+
+    --I don't know what this would be so I'll leave it out for now
+    --self:queuecommand("MortyFarts") --songs stuff
+  end,
+    LoadFont("_vikive bold 48px") ..
+        {
+          Name = "MSD Value",
+          InitCommand = function(self)
+            self:xy(545,518):halign(1):valign(0):diffusealpha(0):zoom(1)
+          end,
+          GetMSDCommand = function(self)
+          local song = GAMESTATE:GetCurrentSong()
+          local steps = GAMESTATE:GetCurrentSteps(PLAYER_1)
+            if song then
+              if steps:GetStepsType() == "StepsType_Dance_Single" then
+                local meter = steps:GetMSD(getCurRateValue(), 1)
+                self:settextf("%05.2f", meter):diffusealpha(1)
+                self:diffuse(byMSD(meter)):diffusealpha(1)
+              else
+                self:settextf("%5.2f", steps:GetMeter()):diffusealpha(1)-- fallthrough to pre-defined meters for non 4k charts -mina
+                self:diffuse(byDifficulty(steps:GetDifficulty())):diffusealpha(1)
+              end
+            else
+              self:settext("")
+            end
+          end,
+          CurrentRateChangedMessageCommand = function(self)
+          self:queuecommand("GetMSD") --steps stuff
+          end,
+          CurrentStepsP1ChangedMessageCommand = function(self)
+          self:queuecommand("GetMSD") --steps stuff
+          end
+    }
+  }
+--Hardcoded MSD (mockup, no functionality)
+--Keeping this as a reference for how the MSD should look in the end
+--[[t[#t + 1] =
   LoadFont("_vikive bold 48px") ..
     {
       InitCommand=function(self)
@@ -279,7 +324,9 @@ t[#t + 1] =
       OnCommand=function(self)
         self:settext("1")
       end
-  }
+  }--]]
+
+--MSD text 
 t[#t + 1] =
   LoadFont("_raleway extrabold 12px") ..
     {

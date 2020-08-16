@@ -10,7 +10,9 @@ t[#t+1] = Def.Sprite {
 		end,
 		SetMessageCommand = function(self,params)
 			local song = params.Song
+			local focus = params.HasFocus
 			local bnpath = nil
+
 			if song then
 				bnpath = params.Song:GetBannerPath()
 				if not bnpath then
@@ -18,6 +20,12 @@ t[#t+1] = Def.Sprite {
 				end
 				self:Load(bnpath)
 				self:zoomto(120,60)
+			end
+
+			if focus then
+				self:diffusealpha(1)
+			else
+				self:diffusealpha(0.4)
 			end
 		end
 	};
