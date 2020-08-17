@@ -23,7 +23,7 @@ t[#t + 1] =
 		end
 	}
 
-t[#t + 1] =
+t[#t + 1] = Def.ActorFrame {
 --Health bar background
 	Def.Sprite {
 			Name="Health";
@@ -32,7 +32,7 @@ t[#t + 1] =
 			Delay0000=1;
 			InitCommand=function(self)
 			local health = STATSMAN:GetCurStageStats():GetPlayerStageStats(pn):GetCurrentLife()
-				self:halign(0):zoom(0.44444444):zoomx(0.44444444):diffusealpha(1):addy(1):addx(healthX)
+				self:halign(0):zoom(0.44444444):diffusealpha(1):addy(1):addx(healthX)
 			end,
 		};
 
@@ -44,14 +44,14 @@ t[#t + 1] =
 			Delay0000=1;
 			InitCommand=function(self)
 			local health = STATSMAN:GetCurStageStats():GetPlayerStageStats(pn):GetCurrentLife()
-				self:halign(0):zoom(0.44444444):zoomx(0.44444444):diffusealpha(1):addy(1):addx(healthX):croptop(health)
+				self:halign(0):zoom(0.44444444):diffusealpha(1):addy(1):addx(healthX):croptop(1 - health)
 			end,
 			JudgmentMessageCommand=function(self)
 			local health = STATSMAN:GetCurStageStats():GetPlayerStageStats(pn):GetCurrentLife()
 				if health >= 0.4 then
-					self:stoptweening():decelerate(0.128):diffusealpha(1):croptop( 1 - health )
+					self:stoptweening():decelerate(0.064):diffusealpha(1):croptop( 1 - health )
 				else
-					self:stoptweening():decelerate(0.128):diffusealpha(0):croptop( 1 - health )
+					self:stoptweening():decelerate(0.064):diffusealpha(0):croptop( 1 - health )
 				end
 			end
 		};
@@ -64,14 +64,14 @@ t[#t + 1] =
 			Delay0000=1;
 			InitCommand=function(self)
 			local health = STATSMAN:GetCurStageStats():GetPlayerStageStats(pn):GetCurrentLife()
-				self:halign(0):zoom(0.44444444):zoomx(0.44444444):diffusealpha(0):addy(1):addx(healthX):croptop(health)
+				self:halign(0):zoom(0.44444444):diffusealpha(0):addy(1):addx(healthX):croptop(1 - health)
 			end,
 			JudgmentMessageCommand=function(self)
 			local health = STATSMAN:GetCurStageStats():GetPlayerStageStats(pn):GetCurrentLife()
 				if health <= 0.4 then
-					self:stoptweening():decelerate(0.128):diffusealpha(1):croptop( 1 - health )
+					self:stoptweening():decelerate(0.064):diffusealpha(1):croptop( 1 - health )
 				else
-					self:stoptweening():decelerate(0.128):diffusealpha(0):croptop( 1 - health )
+					self:stoptweening():decelerate(0.064):diffusealpha(0):croptop( 1 - health )
 				end
 			end
 		};
@@ -84,15 +84,16 @@ t[#t + 1] =
 			Delay0000=1;
 			InitCommand=function(self)
 			local health = STATSMAN:GetCurStageStats():GetPlayerStageStats(pn):GetCurrentLife()
-				self:halign(0):blend("BlendMode_Add"):zoomx(0.44444444):zoom(0.44444444):diffusealpha(1):addy(1):addx(healthX):croptop(health):diffuseshift():effectcolor1(color("#FFFFFF33")):effectcolor2(color("#FFFFFF88")):fadetop(0.05)
+				self:halign(0):blend("BlendMode_Add"):zoom(0.44444444):diffusealpha(1):addy(1):addx(healthX - 8):croptop(1 - health):diffuseshift():effectcolor1(color("#FFFFFF33")):effectcolor2(color("#FFFFFF88")):fadetop(0.05)
 			end,
 			JudgmentMessageCommand=function(self)
 			local health = STATSMAN:GetCurStageStats():GetPlayerStageStats(pn):GetCurrentLife()
 				if health >= 0.4 then
-					self:stoptweening():decelerate(0.128):diffusealpha(1):croptop( 1 - health ):fadetop(0.05)
+					self:stoptweening():decelerate(0.064):diffusealpha(1):croptop( 1 - health ):fadetop(0.05)
 				else
-					self:stoptweening():decelerate(0.128):diffusealpha(0):croptop( 1 - health ):fadetop(0.05)
+					self:stoptweening():decelerate(0.064):diffusealpha(0):croptop( 1 - health ):fadetop(0.05)
 				end
 			end
 		};
+	}
 return t
