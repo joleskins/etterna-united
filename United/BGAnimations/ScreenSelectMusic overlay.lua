@@ -17,20 +17,25 @@ else
 end
 
 --Banner background
-t[#t + 1] =
+--Make this a fallback sprite instead of a quad later
+--[[t[#t + 1] =
   Def.Quad{
     InitCommand=function(self)
       self:halign(0):valign(0):xy(75,455):zoomto(500,127):diffuse(color("#000000")):diffusealpha(0.4)
     end
-  }
+  }--]]
 
 --StepsDisplay background
-t[#t + 1] =
+t[#t + 1] = Def.ActorFrame {
+  InitCommand=function(self)
+    self:xy(75,455)
+  end,
+
   Def.Quad{
     InitCommand=function(self)
-      self:halign(0):valign(0):xy(75,155):zoomto(500,300):diffuse(color("#000000")):diffusealpha(1)
+      self:halign(0):valign(0):xy(0,0):zoomto(500,127):diffuse(color("#000000")):diffusealpha(0.4)
     end
-  }
+  },
 
 --StepsDisplay placeholders
 
@@ -54,44 +59,39 @@ t[#t + 1] =
   }--]]
 
 --Easy(locked)
-t[#t + 1] =
   Def.Quad {
   Name="DiffFrameTopNormal";
   InitCommand = function(self)
-    self:xy(91,474):zoomto(111,2):halign(0):valign(0):diffusealpha(0.2)
+    self:xy(16,19):zoomto(111,2):halign(0):valign(0):diffusealpha(0.2)
   end
-}
-t[#t + 1] =
+  },
   Def.Quad {
   Name="DiffFrameRightNormal";
   InitCommand = function(self)
-    self:xy(202,476):zoomto(2,21):halign(1):valign(0):diffusealpha(0.2)
+    self:xy(127,21):zoomto(2,21):halign(1):valign(0):diffusealpha(0.2)
   end
-}
-t[#t + 1] =
+  },
   Def.Quad {
   Name="DiffFrameLeftNormal";
   InitCommand = function(self)
-    self:xy(91,476):zoomto(2,21):halign(0):valign(0):diffusealpha(0.2)
+    self:xy(16,21):zoomto(2,21):halign(0):valign(0):diffusealpha(0.2)
   end
-}
-t[#t + 1] =
+  },
   Def.Quad {
   Name="DiffFrameBottomNormal";
   InitCommand = function(self)
-    self:xy(91,497):zoomto(111,2):halign(0):valign(0):diffusealpha(0.2)
+    self:xy(16,42):zoomto(111,2):halign(0):valign(0):diffusealpha(0.2)
   end
-}
-t[#t + 1] =
+  },
   LoadFont("_raleway extrabold 16px") ..
     {
       InitCommand=function(self)
-        self:uppercase(true):diffusealpha(1):halign(0):valign(0):xy(126,481):diffusealpha(0.2)
+        self:uppercase(true):diffusealpha(1):halign(0):valign(0):xy(51-2,26):diffusealpha(0.2)
       end,
       OnCommand=function(self)
         self:settext("EASY")
       end
-  }
+  },
 --Normal(selected)
 --[[t[#t + 1] =
   Def.Quad {
@@ -112,44 +112,39 @@ t[#t + 1] =
   }--]]
 
 --Normal(locked)
-t[#t + 1] =
   Def.Quad {
   Name="DiffFrameTopNormal";
   InitCommand = function(self)
-    self:xy(210,474):zoomto(111,2):halign(0):valign(0):diffusealpha(0.2)
+    self:xy(135,19):zoomto(111,2):halign(0):valign(0):diffusealpha(0.2)
   end
-}
-t[#t + 1] =
+  },
   Def.Quad {
   Name="DiffFrameRightNormal";
   InitCommand = function(self)
-    self:xy(321,476):zoomto(2,21):halign(1):valign(0):diffusealpha(0.2)
+    self:xy(246,21):zoomto(2,21):halign(1):valign(0):diffusealpha(0.2)
   end
-}
-t[#t + 1] =
+  },
   Def.Quad {
   Name="DiffFrameLeftNormal";
   InitCommand = function(self)
-    self:xy(210,476):zoomto(2,21):halign(0):valign(0):diffusealpha(0.2)
+    self:xy(135,21):zoomto(2,21):halign(0):valign(0):diffusealpha(0.2)
   end
-}
-t[#t + 1] =
+  },
   Def.Quad {
   Name="DiffFrameBottomNormal";
   InitCommand = function(self)
-    self:xy(210,497):zoomto(111,2):halign(0):valign(0):diffusealpha(0.2)
+    self:xy(135,42):zoomto(111,2):halign(0):valign(0):diffusealpha(0.2)
   end
-}
-t[#t + 1] =
+  },
   LoadFont("_raleway extrabold 16px") ..
     {
       InitCommand=function(self)
-        self:uppercase(true):diffusealpha(1):halign(0):valign(0):xy(231,481):diffusealpha(0.2)
+        self:uppercase(true):diffusealpha(1):halign(0):valign(0):xy(156,26):diffusealpha(0.2)
       end,
       OnCommand=function(self)
         self:settext("NORMAL")
       end
-  }
+  },
 
 --Hard(selected)
 --[[t[#t + 1] =
@@ -170,84 +165,73 @@ t[#t + 1] =
       end
   }--]]
 
---Hard(not selected)
-t[#t + 1] =
+--Hard(not selected )
   Def.Quad {
   Name="DiffFrameTopHard";
   InitCommand = function(self)
-    self:xy(329,474):zoomto(111,2):halign(0):valign(0):diffuse(color("#a435c4")):diffusealpha(1)
+    self:xy(254,19):zoomto(111,2):halign(0):valign(0):diffuse(color("#a435c4")):diffusealpha(1)
   end
-}
-t[#t + 1] =
+  },
   Def.Quad {
   Name="DiffFrameRightHard";
   InitCommand = function(self)
-    self:xy(440,476):zoomto(2,21):halign(1):valign(0):diffuse(color("#a435c4")):diffusealpha(1)
+    self:xy(365,21):zoomto(2,21):halign(1):valign(0):diffuse(color("#a435c4")):diffusealpha(1)
   end
-}
-t[#t + 1] =
+  },
   Def.Quad {
   Name="DiffFrameLeftHard";
   InitCommand = function(self)
-    self:xy(329,476):zoomto(2,21):halign(0):valign(0):diffuse(color("#a435c4")):diffusealpha(1)
+    self:xy(254,21):zoomto(2,21):halign(0):valign(0):diffuse(color("#a435c4")):diffusealpha(1)
   end
-}
-t[#t + 1] =
+  },
   Def.Quad {
   Name="DiffFrameBottomHard";
   InitCommand = function(self)
-    self:xy(329,497):zoomto(111,2):halign(0):valign(0):diffuse(color("#a435c4")):diffusealpha(1)
+    self:xy(254,42):zoomto(111,2):halign(0):valign(0):diffuse(color("#a435c4")):diffusealpha(1)
   end
-}
-t[#t + 1] =
+  },
   LoadFont("_raleway extrabold 16px") ..
     {
       InitCommand=function(self)
-        self:uppercase(true):diffusealpha(1):halign(0):valign(0):xy(363,481):diffuse(color("#a435c4"))
+        self:uppercase(true):diffusealpha(1):halign(0):valign(0):xy(288,26):diffuse(color("#a435c4"))
       end,
       OnCommand=function(self)
         self:settext("HARD")
       end
-}
+  },
 
 --Challenge(selected)
-t[#t + 1] =
   Def.Quad {
   Name="DiffHighlightChallenge";
   InitCommand = function(self)
-    self:xy(448,474):zoomto(111,25):halign(0):valign(0):diffuse(color("#a435c4")):diffusealpha(1)
+    self:xy(373,19):zoomto(111,25):halign(0):valign(0):diffuse(color("#a435c4")):diffusealpha(1)
   end
-}
-t[#t + 1] =
+  },
   LoadFont("_raleway extrabold 16px") ..
     {
       InitCommand=function(self)
-        self:uppercase(true):diffusealpha(1):halign(0):valign(0):xy(455,481)
+        self:uppercase(true):diffusealpha(1):halign(0):valign(0):xy(380,26)
       end,
       OnCommand=function(self)
         self:settext("CHALLENGE")
       end
-  }
+  },
 
 --MSD Display. Adapted from Til Death
-t[#t + 1] =
-  Def.ActorFrame {
     GetMSDCommand = function()
       local song = GAMESTATE:GetCurrentSong()
       song:GetMSD(rate, skillsetindex)
       score = GetDisplayScore()
     end,
     CurrentRateChangedMessageCommand = function(self)
-    self:queuecommand("GetMSD") --steps stuff
+    self:queuecommand("GetMSD")
+    end,
 
-    --I don't know what this would be so I'll leave it out for now
-    --self:queuecommand("MortyFarts") --songs stuff
-  end,
     LoadFont("_vikive bold 48px") ..
         {
           Name = "MSD Value",
           InitCommand = function(self)
-            self:xy(545,518):halign(1):valign(0):diffusealpha(0):zoom(1)
+            self:xy(484-9,44+19):halign(1):valign(0):diffusealpha(0):zoom(1)
           end,
           GetMSDCommand = function(self)
           local song = GAMESTATE:GetCurrentSong()
@@ -258,7 +242,7 @@ t[#t + 1] =
                 self:settextf("%05.2f", meter):diffusealpha(1)
                 self:diffuse(byMSD(meter)):diffusealpha(1)
               else
-                self:settextf("%5.2f", steps:GetMeter()):diffusealpha(1)-- fallthrough to pre-defined meters for non 4k charts -mina
+                self:settextf("%5.2f", steps:GetMeter()):diffusealpha(1)
                 self:diffuse(byDifficulty(steps:GetDifficulty())):diffusealpha(1)
               end
             else
@@ -266,13 +250,12 @@ t[#t + 1] =
             end
           end,
           CurrentRateChangedMessageCommand = function(self)
-          self:queuecommand("GetMSD") --steps stuff
+          self:queuecommand("GetMSD")
           end,
           CurrentStepsP1ChangedMessageCommand = function(self)
-          self:queuecommand("GetMSD") --steps stuff
+          self:queuecommand("GetMSD")
           end
-    }
-  }
+    },
 --Hardcoded MSD (mockup, no functionality)
 --Keeping this as a reference for how the MSD should look in the end
 --[[t[#t + 1] =
@@ -327,23 +310,27 @@ t[#t + 1] =
   }--]]
 
 --MSD text 
-t[#t + 1] =
   LoadFont("_raleway extrabold 12px") ..
     {
       InitCommand=function(self)
-        self:uppercase(true):diffusealpha(0.3):halign(1):valign(0):xy(559,559)
+        self:uppercase(true):diffusealpha(0.3):halign(1):valign(0):xy(484,104)
       end,
       OnCommand=function(self)
         self:settext("MSD")
       end
   }
+}
 
---Banner(but it's actually the background image)
-t[#t + 1] =
+--Banner(but it's actually the song background image)
+t[#t + 1] = Def.ActorFrame{
+  InitCommand = function(self)
+    self:xy(75,155)
+  end,
+
   Def.Sprite {
   Name = "Banner",
     InitCommand = function(self)
-      self:halign(0):valign(0):xy(75,155):scaletoclipped(500,300):diffusealpha(1)
+      self:halign(0):valign(0):xy(0,0):scaletoclipped(500,300):diffusealpha(1)
     end,
 
     CurrentSongChangedMessageCommand = function(self)
@@ -372,7 +359,157 @@ t[#t + 1] =
       end
       self:diffusealpha(1)
     end,
+  },
+
+  Def.Sprite {
+  Name = "Banner Gradient",
+    Texture=THEME:GetPathG("","Banner Gradient");
+    InitCommand = function(self)
+      self:halign(0):valign(0):xy(0,0):zoomto(500,300):diffusealpha(1)
+    end,
+  },
+
+  LoadFont("_raleway semibold 24px") ..
+    {
+      Name = "Title Text",
+      
+      InitCommand = function(self)
+          self:xy(16,30):halign(0):valign(0)
+          self:zoom(1)
+          self:queuecommand("TitleWithRate")
+      end,
+
+      TitleWithRateCommand = function(self)
+      local song = GAMESTATE:GetCurrentSong()
+      local songtitle = song:GetMainTitle()
+        if getCurRateDisplayString() == "1.0xMusic" then
+          ratestring = ""
+          plusstring = ""
+        else
+          ratestring = getCurRateDisplayString():gsub("Music","")
+          plusstring = " + "
+        end
+          self:diffusealpha(0)
+          self:xy(16,30):halign(0):valign(0)
+          self:zoom(1)
+          self:settext(songtitle .. plusstring .. ratestring)
+          self:accelerate(0.15)
+          self:diffusealpha(1)
+      end,
+
+      StepsChangedCommand = function(self)
+          self:queuecommand("TitleWithRate")
+      end,
+      CurrentSongChangedMessageCommand = function(self)
+        if INPUTFILTER:IsBeingPressed("tab") then
+          self:finishtweening():smooth(0.25):diffusealpha(0):sleep(0.2):queuecommand("TitleWithRate")
+        else
+          self:finishtweening():queuecommand("TitleWithRate")
+        end
+      end
+    },
+
+  LoadFont("_raleway semibold 16px") ..
+    {
+      Name = "Artist Text",
+      
+      InitCommand = function(self)
+          self:xy(16,30):halign(0):valign(0)
+          self:zoom(1)
+          self:queuecommand("ArtistText")
+      end,
+
+      ArtistTextCommand = function(self)
+      local song = GAMESTATE:GetCurrentSong()
+      local songartist = song:GetDisplayArtist()
+          self:diffusealpha(0)
+          self:xy(16,56):halign(0):valign(0)
+          self:zoom(1)
+          self:settext(songartist .. " " .. ratestring)
+          self:accelerate(0.15)
+          self:diffusealpha(.65)
+      end,
+
+      StepsChangedCommand = function(self)
+          self:queuecommand("ArtistText")
+      end,
+      CurrentSongChangedMessageCommand = function(self)
+        if INPUTFILTER:IsBeingPressed("tab") then
+          self:finishtweening():smooth(0.25):diffusealpha(0):sleep(0.2):queuecommand("ArtistText")
+        else
+          self:finishtweening():queuecommand("ArtistText")
+        end
+      end
+    },
+
+  LoadFont("_raleway extrabold 12px") ..
+    {
+      Name = "BPM Text",
+      
+      InitCommand = function(self)
+          self:xy(16+1,30):halign(0):valign(0)
+          self:zoom(1)
+          self:queuecommand("BPMText")
+      end,
+
+      BPMTextCommand = function(self)
+      local song = GAMESTATE:GetCurrentSong()
+      local songartist = song:GetDisplayArtist()
+          self:diffusealpha(0)
+          self:xy(16+1,80):halign(0):valign(0)
+          self:zoom(1)
+          self:settext("BPM")
+          self:accelerate(0.15)
+          self:diffusealpha(.65)
+      end,
+
+      StepsChangedCommand = function(self)
+          self:queuecommand("BPMText")
+      end,
+      CurrentSongChangedMessageCommand = function(self)
+        if INPUTFILTER:IsBeingPressed("tab") then
+          self:finishtweening():smooth(0.25):diffusealpha(0):sleep(0.2):queuecommand("BPMText")
+        else
+          self:finishtweening():queuecommand("BPMText")
+        end
+      end
+    },
+
+  LoadFont("_vikive bold 12px") ..
+    {
+      Name = "BPM Numbers",
+      
+      InitCommand = function(self)
+          self:xy(48-9,30):halign(0):valign(0)
+          self:zoom(1)
+          self:queuecommand("BPMNumbers")
+      end,
+
+      BPMNumbersCommand = function(self)
+      local song = GAMESTATE:GetCurrentSong()
+      local songbpm = song:GetDisplayBpms()
+          self:diffusealpha(0)
+          self:xy(48-9,80):halign(0):valign(0)
+          self:zoom(1)
+          self:settextf("%5.0f", songbpm[1])
+          self:accelerate(0.15)
+          self:diffusealpha(.65)
+      end,
+
+      StepsChangedCommand = function(self)
+          self:queuecommand("BPMNumbers")
+      end,
+      CurrentSongChangedMessageCommand = function(self)
+        if INPUTFILTER:IsBeingPressed("tab") then
+          self:finishtweening():smooth(0.25):diffusealpha(0):sleep(0.2):queuecommand("BPMNumbers")
+        else
+          self:finishtweening():queuecommand("BPMNumbers")
+        end
+      end
+    },
+
 }
+
 
 --Screen name text
 t[#t + 1] =
