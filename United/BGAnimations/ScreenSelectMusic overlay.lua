@@ -218,11 +218,6 @@ t[#t + 1] =
   },
 
 --MSD Display. Adapted from Til Death
-    GetMSDCommand = function()
-      local song = GAMESTATE:GetCurrentSong()
-      song:GetMSD(rate, skillsetindex)
-      score = GetDisplayScore()
-    end,
     CurrentRateChangedMessageCommand = function(self)
     self:queuecommand("GetMSD")
     end,
@@ -381,7 +376,9 @@ t[#t + 1] = Def.ActorFrame{
 
       TitleWithRateCommand = function(self)
       local song = GAMESTATE:GetCurrentSong()
-      local songtitle = song:GetMainTitle()
+      local rawsongtitle = song:GetMainTitle()
+      local finalsongtitle
+
         if getCurRateDisplayString() == "1.0xMusic" then
           ratestring = ""
           plusstring = ""
@@ -392,7 +389,14 @@ t[#t + 1] = Def.ActorFrame{
           self:diffusealpha(0)
           self:xy(16,30):halign(0):valign(0)
           self:zoom(1)
-          self:settext(songtitle .. plusstring .. ratestring)
+          self:settext(rawsongtitle .. plusstring .. ratestring)
+        --Truncate song title if it exceeds 26 characters
+        if self:GetZoomedWidth() > 425 then
+          finalsongtitle = string.sub(song:GetMainTitle(),1,26) .. "..."
+        else
+          finalsongtitle = song:GetMainTitle()
+        end
+          self:settext(finalsongtitle .. plusstring .. ratestring)
           self:accelerate(0.15)
           self:diffusealpha(1)
       end,
@@ -406,7 +410,18 @@ t[#t + 1] = Def.ActorFrame{
         else
           self:finishtweening():queuecommand("TitleWithRate")
         end
-      end
+      end,
+
+      --For rate keybinds
+      CodeMessageCommand = function(self, params)
+      local rate = getCurRateValue()
+      ChangeMusicRate(rate, params)
+        if INPUTFILTER:IsBeingPressed("tab") then
+          self:finishtweening():smooth(0.25):diffusealpha(0):sleep(0.2):queuecommand("TitleWithRate")
+        else
+          self:finishtweening():queuecommand("TitleWithRate")
+        end
+      end,
     },
 
   LoadFont("_raleway semibold 16px") ..
@@ -425,7 +440,7 @@ t[#t + 1] = Def.ActorFrame{
           self:diffusealpha(0)
           self:xy(16,56):halign(0):valign(0)
           self:zoom(1)
-          self:settext(songartist .. " " .. ratestring)
+          self:settext(songartist)
           self:accelerate(0.15)
           self:diffusealpha(.65)
       end,

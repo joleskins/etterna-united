@@ -16,7 +16,7 @@ t[#t+1] = Def.Sprite {
 			if song then
 				bnpath = params.Song:GetBannerPath()
 				if not bnpath then
-					bnpath = THEME:GetPathG("Common", "fallback banner")
+					bnpath = THEME:GetPathG("Common", "fallback wheelbanner")
 				end
 				self:Load(bnpath)
 				self:zoomto(120,60)
