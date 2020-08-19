@@ -43,7 +43,7 @@ t[#t + 1] = Def.ActorFrame {
 			Frame0000=0;
 			Delay0000=1;
 			InitCommand=function(self)
-			local health = STATSMAN:GetCurStageStats():GetPlayerStageStats(pn):GetCurrentLife()
+			local health = 0.5
 				self:halign(0):zoom(0.44444444):diffusealpha(1):addy(1):addx(healthX):croptop(1 - health)
 			end,
 			JudgmentMessageCommand=function(self)
@@ -63,7 +63,7 @@ t[#t + 1] = Def.ActorFrame {
 			Frame0000=0;
 			Delay0000=1;
 			InitCommand=function(self)
-			local health = STATSMAN:GetCurStageStats():GetPlayerStageStats(pn):GetCurrentLife()
+			local health = 0.5
 				self:halign(0):zoom(0.44444444):diffusealpha(0):addy(1):addx(healthX):croptop(1 - health)
 			end,
 			JudgmentMessageCommand=function(self)
@@ -83,7 +83,7 @@ t[#t + 1] = Def.ActorFrame {
 			Frame0000=0;
 			Delay0000=1;
 			InitCommand=function(self)
-			local health = STATSMAN:GetCurStageStats():GetPlayerStageStats(pn):GetCurrentLife()
+			local health = 0.5
 				self:halign(0):blend("BlendMode_Add"):zoom(0.44444444):diffusealpha(1):addy(1):addx(healthX - 8):croptop(1 - health):diffuseshift():effectcolor1(color("#FFFFFF33")):effectcolor2(color("#FFFFFF88")):fadetop(0.05)
 			end,
 			JudgmentMessageCommand=function(self)

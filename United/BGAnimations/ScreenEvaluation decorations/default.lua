@@ -18,8 +18,8 @@ t[#t + 1] =
 				local ws = "Wife" .. wv .. " J"
 				local js = judge ~= 9 and judge or "ustice"
 				self:settextf(
-					"%05.2f%% (%s)", 
-					notShit.floor(score:GetWifeScore() * 100, 2), ws .. js
+					"%05.2f%%", 
+					notShit.floor(score:GetWifeScore() * 100, 2)
 				)
 			end,
 			ScoreChangedMessageCommand = function(self)

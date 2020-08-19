@@ -43,8 +43,7 @@ local t =
 			return
 		end; --]]
 	ToastyAchievedMessageCommand = function(self, params)
-		if params.PlayerNumber == player then
-			self:thump(2):effectclock("beat")
+		if params.PlayerNumber == player then return
 		end
 	end,
 	ComboCommand = function(self, param)
@@ -66,11 +65,11 @@ local t =
 		c.Label:settext(labeltext)
 		c.Label:visible(false)
 
-		param.Zoom = scale(iCombo, 0, NumberMaxZoomAt, NumberMinZoom, NumberMaxZoom)
-		param.Zoom = clamp(param.Zoom, NumberMinZoom, NumberMaxZoom)
+		param.Zoom = 1
+		param.Zoom = 1
 
-		param.LabelZoom = scale(iCombo, 0, NumberMaxZoomAt, LabelMinZoom, LabelMaxZoom)
-		param.LabelZoom = clamp(param.LabelZoom, LabelMinZoom, LabelMaxZoom)
+		param.LabelZoom = 1
+		param.LabelZoom = 1
 
 		c.Number:visible(true)
 		c.Label:visible(false)

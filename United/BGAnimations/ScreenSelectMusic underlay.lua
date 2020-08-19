@@ -83,18 +83,25 @@ for i=1,12 do
 				self:finishtweening():smooth(0.5):diffusealpha(0):sleep(0.2):queuecommand("ModifySongBackground")
 			end,
 			ModifySongBackgroundCommand = function(self)
+      local bgpath = THEME:GetPathG("","Common fallback background")
 				self:finishtweening()
 				if GAMESTATE:GetCurrentSong() and GAMESTATE:GetCurrentSong():GetBackgroundPath() then
+          bgpath = GAMESTATE:GetCurrentSong():GetBackgroundPath()
 					self:finishtweening()
 					self:visible(true)
-					self:LoadBackground(GAMESTATE:GetCurrentSong():GetBackgroundPath())
+					self:Load(bgpath)
 					self:scaletocover(-3, -3, SCREEN_WIDTH+3, SCREEN_BOTTOM+3)
 					self:xy(bgPosTable[i][1], bgPosTable[i][2])
 					self:sleep(0.25)
 					self:smooth(0.5)
 					self:diffusealpha(brightness)
 				else
-					self:visible(false)
+					self:Load(bgpath)
+          self:scaletocover(-3, -3, SCREEN_WIDTH+3, SCREEN_BOTTOM+3)
+          self:xy(bgPosTable[i][1], bgPosTable[i][2])
+          self:sleep(0.25)
+          self:smooth(0.5)
+          self:diffusealpha(brightness)
 				end
 			end,
 			OffCommand = function(self)
