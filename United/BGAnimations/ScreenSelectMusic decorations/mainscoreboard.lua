@@ -75,7 +75,7 @@ for i = 1 ,7 do
 				Name="ScoreAvatar" .. tostring(i);
 				OnCommand=function(self)
 				--Avoid defining file extension to support multiple image formats
-				local avatarTexture = THEME:GetPathG("","Placeholders/" .. tostring(math.random(1,14)) .. " scoreboard")
+				local avatarTexture = THEME:GetPathG("","Placeholders/" .. tostring(math.random(1,32)) .. " scoreboard")
 					self:halign(0)
 					self:valign(0)
 					self:Load(avatarTexture)

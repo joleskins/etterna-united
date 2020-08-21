@@ -29,4 +29,27 @@ t[#t+1] = Def.Sprite {
 			end
 		end
 	};
+t[#t+1] = Def.Sprite {
+	Texture=THEME:GetPathG("", "WheelItem/wheel highlight 1x6");
+	Frames=Sprite.LinearFrames(6,99999999);
+	InitCommand = function(self)
+		self:loop(0)
+		self:fadeleft(0)
+		self:halign(0)
+		self:zoom(1)
+		self:x(-10)
+		self:y(13)
+		self:diffusealpha(1)
+		self:setstate(math.random(0,5))
+		end,
+		SetMessageCommand = function(self,params)
+			local focus2 = params.HasFocus
+
+			if focus2 then
+				self:diffusealpha(1)
+			else
+				self:diffusealpha(0)
+			end
+		end
+	};
 return t

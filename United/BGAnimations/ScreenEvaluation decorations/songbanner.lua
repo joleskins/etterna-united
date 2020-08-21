@@ -3,7 +3,9 @@ local t = Def.ActorFrame {}
 --Banner(but it's actually the song background image)
 t[#t + 1] = Def.ActorFrame{
   InitCommand = function(self)
-    self:xy(75,155)
+    self:xy(SCREEN_CENTER_X-250,SCREEN_CENTER_Y-300)
+    self:halign(0.5)
+    self:valign(0.5)
   end,
 
   Def.Sprite {
@@ -12,7 +14,7 @@ t[#t + 1] = Def.ActorFrame{
       self:halign(0):valign(0):xy(0,0):scaletoclipped(500,300):diffusealpha(1)
     end,
 
-    CurrentSongChangedMessageCommand = function(self)
+    OnCommand = function(self)
       if INPUTFILTER:IsBeingPressed("tab") then
         self:finishtweening():smooth(0.25):diffusealpha(0):sleep(0.2):queuecommand("ModifyBanner")
       else

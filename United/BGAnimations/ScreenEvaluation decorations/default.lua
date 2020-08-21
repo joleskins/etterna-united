@@ -1,6 +1,12 @@
 local t = Def.ActorFrame {}
 
-t[#t + 1] =
+
+t[#t + 1] = LoadActor("background")
+t[#t + 1] = LoadActor("songbanner")
+t[#t + 1] = LoadActor("difficultydisplay")
+
+--Old placeholder percent
+--[[t[#t + 1] =
 	LoadFont("Common Normal") ..
 		{
 			Name = "NormalText",
@@ -55,6 +61,6 @@ t[#t + 1] =
 					MESSAGEMAN:Broadcast("RecalculateGraphs", {judge = judge})
 				end
 			end
-		}
+		}--]]
 
 return t
