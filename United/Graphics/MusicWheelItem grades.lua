@@ -34,6 +34,9 @@ t[#t+1] = Def.Quad {
 				elseif grade == "Grade_Tier15" or grade == "Grade_Tier16" then
 					---C & D
 					self:diffuse(color("#c97bff"))
+				elseif grade == "Grade_Tier15" or grade == "Grade_Tier16" then
+					---F
+					self:diffuse(color("#820000"))
 				else
 					--No play / failed
 					self:diffuse(color("#4d4d4d"))

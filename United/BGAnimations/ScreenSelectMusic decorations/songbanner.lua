@@ -70,6 +70,7 @@ t[#t + 1] = Def.ActorFrame{
           ratestring = getCurRateDisplayString():gsub("Music","")
           plusstring = " + "
         end
+          self:finishtweening()
           self:diffusealpha(0)
           self:xy(16,30):halign(0):valign(0)
           self:zoom(1)
@@ -121,6 +122,7 @@ t[#t + 1] = Def.ActorFrame{
       ArtistTextCommand = function(self)
       local song = GAMESTATE:GetCurrentSong()
       local songartist = song:GetDisplayArtist()
+          self:finishtweening()
           self:diffusealpha(0)
           self:xy(16,56):halign(0):valign(0)
           self:zoom(1)
@@ -154,11 +156,10 @@ t[#t + 1] = Def.ActorFrame{
       BPMTextCommand = function(self)
       local song = GAMESTATE:GetCurrentSong()
       local songartist = song:GetDisplayArtist()
-          self:diffusealpha(0)
+          self:finishtweening()
           self:xy(16+1,80):halign(0):valign(0)
           self:zoom(1)
           self:settext("BPM")
-          self:accelerate(0.15)
           self:diffusealpha(.65)
       end,
 
@@ -172,6 +173,8 @@ t[#t + 1] = Def.ActorFrame{
           self:finishtweening():queuecommand("BPMText")
         end
       end
+
+
     },
 
   LoadFont("_vikive bold 12px") ..
@@ -187,11 +190,11 @@ t[#t + 1] = Def.ActorFrame{
       BPMNumbersCommand = function(self)
       local song = GAMESTATE:GetCurrentSong()
       local songbpm = song:GetDisplayBpms()
+          self:finishtweening()
           self:diffusealpha(0)
           self:xy(48-9,80):halign(0):valign(0)
           self:zoom(1)
           self:settextf("%5.0f", songbpm[1])
-          self:accelerate(0.15)
           self:diffusealpha(.65)
       end,
 
@@ -204,7 +207,11 @@ t[#t + 1] = Def.ActorFrame{
         else
           self:finishtweening():queuecommand("BPMNumbers")
         end
-      end
+      end,
+
+      RateChangedMessageCommand = function(self)
+        self:queuecommand("BPMNumbers")
+      end,
     },
 
 }
