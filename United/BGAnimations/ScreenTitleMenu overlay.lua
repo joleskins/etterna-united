@@ -40,6 +40,9 @@ local songBPMs = {
 	128		-- Moog - Transformer
 }
 
+--beatCount variable used later for counting beats
+local beatCount = 0
+
 --Set random song in the list from 1 to the length of songList{}
 --This is separate from the song/metadata functions so the song and metadata can be in sync
 local songDiceRoll = math.random(1,#songList)
@@ -108,5 +111,131 @@ t[#t + 1] =
 			self:settext(getRandomTitleSongMetadata())
 		end
 }
+
+--[[t[#t + 1] =
+	Def.Quad{
+		InitCommand=function(self)
+			self:diffuse(color("#FFFFFF"))
+			self:diffusealpha(0.4)
+			self:zoomto(96,96)
+			self:addrotationz(45)
+			self:xy(480,480)
+		end,
+
+		OnCommand=function(self)
+			--Set animation based on BPM of song chosen by songDiceRoll. Divided by 60 to output 1 beat in seconds
+			--self:spring( (songBPMs[songDiceRoll] / 60) * 0.5)
+			ms.ok(songBPMs[songDiceRoll])
+			self:sleep(0.3)
+			--self:spring( (60 / songBPMs[songDiceRoll]) * 0.25)
+			--self:zoomto(128,128)
+			--self:spring( (60 / songBPMs[songDiceRoll]) * 0.25)
+			--self:zoomto(96,96)
+			self:heartbeat()
+			self:effectmagnitude(0.5,1,1.5)
+			self:effectperiod( 60 / songBPMs[songDiceRoll] )
+		end,
+
+
+}
+
+t[#t + 1] =
+	Def.Quad{
+		InitCommand=function(self)
+			self:diffuse(color("#FFFFFF"))
+			self:diffusealpha(0.4)
+			self:zoomto(96,96)
+			self:addrotationz(45)
+			self:xy(396,640)
+		end,
+
+		OnCommand=function(self)
+			--Set animation based on BPM of song chosen by songDiceRoll. Divided by 60 to output 1 beat in seconds
+			--self:spring( (songBPMs[songDiceRoll] / 60) * 0.5)
+			self:sleep(0.3)
+			--self:spring( (60 / songBPMs[songDiceRoll]) * 0.25)
+			--self:zoomto(128,128)
+			--self:spring( (60 / songBPMs[songDiceRoll]) * 0.25)
+			--self:zoomto(96,96)
+			self:bob()
+			self:effectmagnitude(0,15,0)
+			self:effectperiod( 60 / songBPMs[songDiceRoll] )
+		end,
+
+
+}--]]
+
+t[#t + 1] =
+	Def.Quad{
+		InitCommand=function(self)
+			self:diffuse(color("#FFFFFF"))
+			self:diffusealpha(0.4)
+			self:zoomto(96,96)
+			self:addrotationz(45)
+			self:xy(480,480)
+		end,
+
+		OnCommand=function(self)
+			local mE = self
+			ms.ok(songBPMs[songDiceRoll])
+			self:sleep(0.1)
+			self:queuecommand("Thump")
+		end,
+
+		ThumpCommand=function(self)
+			local oneBeat = 60 / songBPMs[songDiceRoll]
+
+			--Use beat count to play special animation every bar
+			if beatCount % 4 == 0 then
+				self:decelerate( oneBeat * 0.1)
+				self:zoomto(256,256)
+				self:accelerate( oneBeat * 0.1)
+				self:zoomto(96,96)
+				self:sleep( oneBeat * 0.8)
+			else
+				self:decelerate( oneBeat * 0.2)
+				self:zoomto(128,128)
+				self:accelerate( oneBeat * 0.2)
+				self:zoomto(96,96)
+				self:sleep( oneBeat * 0.6)
+			end
+
+			beatCount = beatCount + 1
+			ms.ok(beatCount)
+			self:queuecommand("Thump")
+		end,
+
+
+}
+
+--[[t[#t + 1] =
+	Def.Quad{
+		InitCommand=function(self)
+			self:diffuse(color("#FFFFFF"))
+			self:diffusealpha(0.4)
+			self:zoomto(96,96)
+			self:addrotationz(45)
+			self:xy(396,640)
+		end,
+
+		OnCommand=function(self)
+			--Set animation based on BPM of song chosen by songDiceRoll. Divided by 60 to output 1 beat in seconds
+			--self:spring( (songBPMs[songDiceRoll] / 60) * 0.5)
+			self:sleep(0.3)
+			self:queuecommand("Thump")
+		end,
+
+		ThumpCommand=function(self)
+			--Set animation based on BPM of song chosen by songDiceRoll. Divided by 60 to output 1 beat in seconds
+			--self:spring( (songBPMs[songDiceRoll] / 60) * 0.5)
+			self:spring( (60 / songBPMs[songDiceRoll]) * 0.25)
+			self:zoomto(128,128)
+			self:spring( (60 / songBPMs[songDiceRoll]) * 0.25)
+			self:zoomto(96,96)
+			self:queuecommand("Thump")
+		end,
+
+
+}--]]
 
 return t
