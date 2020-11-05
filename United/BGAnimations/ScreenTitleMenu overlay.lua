@@ -134,21 +134,20 @@ t[#t + 1] =
 		end,
 
 		OnCommand=function(self)
-			ms.ok(songBPMs[songDiceRoll])
+			--ms.ok(songBPMs[songDiceRoll])
 			self:sleep(0.1)
 			self:queuecommand("Thump")
 		end,
 
 		ThumpCommand=function(self)
 			local oneBeat = 60 / songBPMs[songDiceRoll]
-
-			if songDiceRoll == chasingmidnight then
-			ms.ok(songDiceRoll)
+			if songDiceRoll == 1 then
 
 				--Reset beat counter when the song loops
 				if beatCount >= totalBeats[songDiceRoll] then
 					beatCount = 0
 				end
+				
 				--Use beat count to play special animation every bar
 				if beatCount % 4 == 0 then
 					self:decelerate( oneBeat * 0.1)
@@ -156,6 +155,30 @@ t[#t + 1] =
 					self:accelerate( oneBeat * 0.1)
 					self:zoomto(96,96)
 					self:sleep( oneBeat * 0.8)
+				elseif beatCount == 7 then
+					for i=0,20 do
+						Def.Quad{
+							InitCommand=function(self)
+								self:diffuse(color("#FFFFFF"))
+								self:diffusealpha(0.4)
+								self:zoomto(48,48)
+								self:addrotationz(45)
+								self:xy(480,480)
+							end,
+							OnCommand=function(self)
+								self:decelerate(OneBeat)
+								self:addx(math.random(1,200))
+								self:addy(math.random(300,600))
+								self:addrotationz(math.random(-720,720))
+								self:diffusealpha(0)
+							end
+						}
+					end
+					self:decelerate( oneBeat * 0.2)
+					self:zoomto(128,128)
+					self:accelerate( oneBeat * 0.2)
+					self:zoomto(96,96)
+					self:sleep( oneBeat * 0.6)
 				else
 					self:decelerate( oneBeat * 0.2)
 					self:zoomto(128,128)
@@ -163,7 +186,7 @@ t[#t + 1] =
 					self:zoomto(96,96)
 					self:sleep( oneBeat * 0.6)
 				end
-			elseif songDiceRoll == everythingbang then
+			elseif songDiceRoll == 2 then
 				
 
 				--Reset beat counter when the song loops
@@ -184,7 +207,7 @@ t[#t + 1] =
 					self:zoomto(96,96)
 					self:sleep( oneBeat * 0.6)
 				end
-			elseif songDiceRoll == forcedinduction then
+			elseif songDiceRoll == 3 then
 				
 
 				--Reset beat counter when the song loops
@@ -205,7 +228,7 @@ t[#t + 1] =
 					self:zoomto(96,96)
 					self:sleep( oneBeat * 0.6)
 				end
-			elseif songDiceRoll == horizons then
+			elseif songDiceRoll == 4 then
 				
 
 				--Reset beat counter when the song loops
@@ -226,7 +249,7 @@ t[#t + 1] =
 					self:zoomto(96,96)
 					self:sleep( oneBeat * 0.6)
 				end
-			elseif songDiceRoll == liftmeup then
+			elseif songDiceRoll == 5 then
 				
 
 				--Reset beat counter when the song loops
@@ -247,7 +270,7 @@ t[#t + 1] =
 					self:zoomto(96,96)
 					self:sleep( oneBeat * 0.6)
 				end
-			elseif songDiceRoll == transformer then
+			elseif songDiceRoll == 6 then
 				
 
 				--Reset beat counter when the song loops
@@ -284,7 +307,6 @@ t[#t + 1] =
 
 
 			beatCount = beatCount + 1
-			ms.ok(beatCount)
 			self:queuecommand("Thump")
 		end
 }
