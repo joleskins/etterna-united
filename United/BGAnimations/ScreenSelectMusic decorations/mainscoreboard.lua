@@ -3,6 +3,18 @@
 --(see line 70)
 local scorePosTable = {0,1,2,3,4,5,6}
 
+
+--Custom clamp function. Leaving this here as a note since it's already built in to the game but it's still useful knowledge.
+--[[function customclamp(number,min_val,max_val)
+  if(number > max_val) then
+    return max_val
+  end
+  if(number < min_val) then
+    return min_val
+  end
+  return number
+end--]]
+
 --Randomly selected usernames on scoreboard
 local playerTable = {
 	"D O G",
@@ -197,7 +209,62 @@ t[#t + 1] = Def.ActorFrame{
 						self:valign(0)
 						self:settext(marvCount .. " / " .. perfCount .. " / " .. greatCount .. " / " .. goodCount .. " / " .. booCount .. " / " .. missCount .. " (" .. comboCount .. "x)")
 					end
-			}
+			},
+
+			LoadFont("_raleway semibold 24px") .. {
+					Name="PBPercent";
+					OnCommand=function(self)
+						self:halign(1)
+						self:valign(0)
+						self:xy(475-2,6+2)
+						self:zoom(1)
+
+						--Grab PB at current song and rate
+						if GAMESTATE:GetCurrentSong() ~= nil then
+							rtTable = getRateTable()
+							if rtTable ~= nil then
+								rates, rateIndex = getUsedRates(rtTable)
+								scoreIndex = 1
+								self:queuecommand("Set")
+							end
+						end
+
+						self:queuecommand("Set")
+					end,
+					--Apply wife%
+					SetCommand = function(self)
+				    	if GAMESTATE:GetCurrentSong() ~= nil then
+		                    rtTable = getRateTable()
+		                    if rtTable ~= nil then
+		                        rates, rateIndex = getUsedRates(rtTable)
+		                        scoreIndex = 1
+		                        local score = rtTable[rates[rateIndex]][scoreIndex]
+		                        self:settextf("%05.2f%%", clamp(notShit.floor(score:GetWifeScore() * 100, 2),0,100))
+		                    else
+		                        self:settext("no scores")
+		                    end
+		                else
+		                    self:settext("no song")
+		                end
+				    end,
+				    --Hopefully I remembered every necessary command here
+				    ScoreChangedMessageCommand = function(self)
+				    	self:queuecommand("Set")
+				   	end,
+				   	CodeMessageCommand = function(self)
+				    	self:queuecommand("Set")
+				   	end,
+				   	CurrentSongChangedMessageCommand = function(self)
+				    	self:queuecommand("Set")
+				   	end,
+				   	StepsChangedCommand = function(self)
+				    	self:queuecommand("Set")
+				   	end,
+				   	RateChangedMessageCommand = function(self)
+				    	self:queuecommand("Set")
+				   	end,
+
+			},
 		}
 	}
 
