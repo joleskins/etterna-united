@@ -9,6 +9,7 @@ t[#t+1] = Def.Quad {
 		self:y(13)
 		self:diffusealpha(1)
 		self:diffuse(color("#4d4d4d"))
+		--self:effectclock("timerglobal")
 		end,
 		SetGradeCommand = function(self, params)
 		local focus = params.HasFocus
@@ -18,27 +19,39 @@ t[#t+1] = Def.Quad {
 --but it just didn't work. I work with limited knowledge
 				if grade == "Grade_Tier01" or grade == "Grade_Tier02" or grade == "Grade_Tier03" or grade == "Grade_Tier04" then 
 					--AAAA
-					self:diffuse(color("#25b1b3"))
+					self:diffuseshift()
+					self:effectcolor1(color("#25b1b3FF"))
+					self:effectcolor2(color("#25b1b340"))
+					self:effectperiod(0.05)
 				elseif grade == "Grade_Tier05" or grade == "Grade_Tier06" or grade == "Grade_Tier07" then 
 					---AAA
-					self:diffuse(color("#e9ba00"))
+					self:diffuseblink()
+					self:effectcolor1(color("#e9ba00FF"))
+					self:effectcolor2(color("#e9ba0040"))
+					self:effectperiod(0.05)
 				elseif grade == "Grade_Tier08" or grade == "Grade_Tier09" or grade == "Grade_Tier10" then
 					---AA
+					self:stopeffect()
 					self:diffuse(color("#1c8843"))
 				elseif grade == "Grade_Tier11" or grade == "Grade_Tier12" or grade == "Grade_Tier13" then
 					---A
+					self:stopeffect()
 					self:diffuse(color("#993742"))
 				elseif grade == "Grade_Tier14" then
 					---B
+					self:stopeffect()
 					self:diffuse(color("#5b78bb"))
 				elseif grade == "Grade_Tier15" or grade == "Grade_Tier16" then
 					---C & D
+					self:stopeffect()
 					self:diffuse(color("#c97bff"))
 				elseif grade == "Grade_Tier15" or grade == "Grade_Tier16" then
 					---F
+					self:stopeffect()
 					self:diffuse(color("#820000"))
 				else
 					--No play / failed
+					self:stopeffect()
 					self:diffuse(color("#4d4d4d"))
 				end
 

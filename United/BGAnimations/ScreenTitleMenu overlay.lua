@@ -8,7 +8,7 @@ if IsSMOnlineLoggedIn() then
 end
 
 --Define list of song files
-local songList = {
+titleSongList = {
 	"chasingmidnight",	 -- Moog - Chasing Midnight (feat. Erin Renee)
 	"everythingbang",	 -- Moog - Everything Bang
 	"forcedinduction",	 -- Moog - Forced Induction
@@ -30,7 +30,7 @@ local metadataList = {
 }
 
 --Define BPMs of songs (will be used later)
-local songBPMs = {
+titleSongBPMs = {
 	120,	-- Moog - Chasing Midnight (feat. Erin Renee)
 	125,	-- Moog - Everything Bang
 	128,	-- Moog - Forced Induction
@@ -40,7 +40,7 @@ local songBPMs = {
 	128		-- Moog - Transformer
 }
 
-local totalBeats = {
+titleSongTotalBeats = {
 	--Not double checked yet
 	160,	-- Moog - Chasing Midnight (feat. Erin Renee)
 	192,	-- Moog - Everything Bang
@@ -51,18 +51,20 @@ local totalBeats = {
 	96		-- Moog - Transformer
 }
 
---beatCount variable used later for counting beats
-local beatCount = 0
+--titleSongBeatCount variable used later for counting beats
+titleSongBeatCount = 0
 
---Set random song in the list from 1 to the length of songList{}
+--Set random song in the list from 1 to the length of titleSongList{}
 --This is separate from the song/metadata functions so the song and metadata can be in sync
-local songDiceRoll = math.random(1,#songList)
+--Global value so other loaded files can use it
+songDiceRoll = math.random(1,#titleSongList)
+--songDiceRoll = titleSongList[1]
 
 function loadRandomTitleSong()
-	local name = "Titlesongs/" .. songList[songDiceRoll]
+	local name = "Titlesongs/" .. titleSongList[songDiceRoll]
 
 	--Stepmania has built in sounds which rely on filenames
-	--This simply utilises that system and edits a .redir file to a random song from songList{}
+	--This simply utilises that system and edits a .redir file to a random song from titleSongList{}
 	local f = RageFileUtil.CreateRageFile()
 	if f:Open("/Themes/" .. THEME:GetCurThemeName() .. "/Sounds/ScreenTitleMenu music.redir", 2) then
     	f:Write(name)
@@ -123,192 +125,10 @@ t[#t + 1] =
 		end
 }
 
-t[#t + 1] =
-	Def.Quad{
-		InitCommand=function(self)
-			self:diffuse(color("#FFFFFF"))
-			self:diffusealpha(0.4)
-			self:zoomto(96,96)
-			self:addrotationz(45)
-			self:xy(480,480)
-		end,
-
-		OnCommand=function(self)
-			--ms.ok(songBPMs[songDiceRoll])
-			self:sleep(0.1)
-			self:queuecommand("Thump")
-		end,
-
-		ThumpCommand=function(self)
-			local oneBeat = 60 / songBPMs[songDiceRoll]
-			if songDiceRoll == 1 then
-
-				--Reset beat counter when the song loops
-				if beatCount >= totalBeats[songDiceRoll] then
-					beatCount = 0
-				end
-				
-				--Use beat count to play special animation every bar
-				if beatCount % 4 == 0 then
-					self:decelerate( oneBeat * 0.1)
-					self:zoomto(256,256)
-					self:accelerate( oneBeat * 0.1)
-					self:zoomto(96,96)
-					self:sleep( oneBeat * 0.8)
-				elseif beatCount == 7 then
-					for i=0,20 do
-						Def.Quad{
-							InitCommand=function(self)
-								self:diffuse(color("#FFFFFF"))
-								self:diffusealpha(0.4)
-								self:zoomto(48,48)
-								self:addrotationz(45)
-								self:xy(480,480)
-							end,
-							OnCommand=function(self)
-								self:decelerate(OneBeat)
-								self:addx(math.random(1,200))
-								self:addy(math.random(300,600))
-								self:addrotationz(math.random(-720,720))
-								self:diffusealpha(0)
-							end
-						}
-					end
-					self:decelerate( oneBeat * 0.2)
-					self:zoomto(128,128)
-					self:accelerate( oneBeat * 0.2)
-					self:zoomto(96,96)
-					self:sleep( oneBeat * 0.6)
-				else
-					self:decelerate( oneBeat * 0.2)
-					self:zoomto(128,128)
-					self:accelerate( oneBeat * 0.2)
-					self:zoomto(96,96)
-					self:sleep( oneBeat * 0.6)
-				end
-			elseif songDiceRoll == 2 then
-				
-
-				--Reset beat counter when the song loops
-				if beatCount >= totalBeats[songDiceRoll] then
-					beatCount = 0
-				end
-				--Use beat count to play special animation every bar
-				if beatCount % 4 == 0 then
-					self:decelerate( oneBeat * 0.1)
-					self:zoomto(256,256)
-					self:accelerate( oneBeat * 0.1)
-					self:zoomto(96,96)
-					self:sleep( oneBeat * 0.8)
-				else
-					self:decelerate( oneBeat * 0.2)
-					self:zoomto(128,128)
-					self:accelerate( oneBeat * 0.2)
-					self:zoomto(96,96)
-					self:sleep( oneBeat * 0.6)
-				end
-			elseif songDiceRoll == 3 then
-				
-
-				--Reset beat counter when the song loops
-				if beatCount >= totalBeats[songDiceRoll] then
-					beatCount = 0
-				end
-				--Use beat count to play special animation every bar
-				if beatCount % 4 == 0 then
-					self:decelerate( oneBeat * 0.1)
-					self:zoomto(256,256)
-					self:accelerate( oneBeat * 0.1)
-					self:zoomto(96,96)
-					self:sleep( oneBeat * 0.8)
-				else
-					self:decelerate( oneBeat * 0.2)
-					self:zoomto(128,128)
-					self:accelerate( oneBeat * 0.2)
-					self:zoomto(96,96)
-					self:sleep( oneBeat * 0.6)
-				end
-			elseif songDiceRoll == 4 then
-				
-
-				--Reset beat counter when the song loops
-				if beatCount >= totalBeats[songDiceRoll] then
-					beatCount = 0
-				end
-				--Use beat count to play special animation every bar
-				if beatCount % 4 == 0 then
-					self:decelerate( oneBeat * 0.1)
-					self:zoomto(256,256)
-					self:accelerate( oneBeat * 0.1)
-					self:zoomto(96,96)
-					self:sleep( oneBeat * 0.8)
-				else
-					self:decelerate( oneBeat * 0.2)
-					self:zoomto(128,128)
-					self:accelerate( oneBeat * 0.2)
-					self:zoomto(96,96)
-					self:sleep( oneBeat * 0.6)
-				end
-			elseif songDiceRoll == 5 then
-				
-
-				--Reset beat counter when the song loops
-				if beatCount >= totalBeats[songDiceRoll] then
-					beatCount = 0
-				end
-				--Use beat count to play special animation every bar
-				if beatCount % 4 == 0 then
-					self:decelerate( oneBeat * 0.1)
-					self:zoomto(256,256)
-					self:accelerate( oneBeat * 0.1)
-					self:zoomto(96,96)
-					self:sleep( oneBeat * 0.8)
-				else
-					self:decelerate( oneBeat * 0.2)
-					self:zoomto(128,128)
-					self:accelerate( oneBeat * 0.2)
-					self:zoomto(96,96)
-					self:sleep( oneBeat * 0.6)
-				end
-			elseif songDiceRoll == 6 then
-				
-
-				--Reset beat counter when the song loops
-				if beatCount >= totalBeats[songDiceRoll] then
-					beatCount = 0
-				end
-				--Use beat count to play special animation every bar
-				if beatCount % 4 == 0 then
-					self:decelerate( oneBeat * 0.1)
-					self:zoomto(512,512)
-					self:accelerate( oneBeat * 0.1)
-					self:zoomto(96,96)
-					self:sleep( oneBeat * 0.8)
-				elseif beatCount == 3 then
-					self:decelerate( oneBeat * 0.2)
-					self:zoomto(1024,128)
-					self:accelerate( oneBeat * 0.2)
-					self:zoomto(96,96)
-					self:sleep( oneBeat * 0.6)
-				else
-					self:decelerate( oneBeat * 0.2)
-					self:zoomto(128,128)
-					self:accelerate( oneBeat * 0.2)
-					self:zoomto(96,96)
-					self:sleep( oneBeat * 0.6)
-				end
-			else
-				self:decelerate( oneBeat * 0.2)
-				self:zoomto(128,128)
-				self:accelerate( oneBeat * 0.2)
-				self:zoomto(96,96)
-				self:sleep( oneBeat * 0.6)
-			end
-
-
-			beatCount = beatCount + 1
-			self:queuecommand("Thump")
-		end
-}
+--Load background animations based on songDiceRoll
+local titleSongBackgroundAnimation = titleSongList[songDiceRoll]
+if titleSongBackgroundAnimation ~= nil then
+	t[#t+1] = LoadActor("ScreenTitleMenu Animations/" .. titleSongBackgroundAnimation)
+end
 
 return t
