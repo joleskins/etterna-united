@@ -10,7 +10,11 @@ return Def.ActorFrame {
 			end,
 
 			OnCommand = function(self)
-				self:diffusealpha(0)
+				if gc:GetIndex() == 0 then
+					self:diffusealpha(.7)
+				else
+					self:diffusealpha(0)
+				end
 			end,
 			GainFocusCommand = function(self)
 				self:diffusealpha(.7)
@@ -26,7 +30,11 @@ return Def.ActorFrame {
 			end,
 
 			OnCommand = function(self)
-				self:diffusealpha(.7)
+				if gc:GetIndex() == 0 then
+					self:diffusealpha(0)
+				else
+					self:diffusealpha(.7)
+				end
 			end,
 			GainFocusCommand = function(self)
 				self:diffusealpha(0)

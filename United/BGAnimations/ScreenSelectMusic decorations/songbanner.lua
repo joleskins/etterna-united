@@ -60,7 +60,7 @@ t[#t + 1] = Def.ActorFrame{
 
       TitleWithRateCommand = function(self)
       local song = GAMESTATE:GetCurrentSong()
-      local rawsongtitle = song:GetMainTitle()
+      local rawsongtitle = song ~= nil and song:GetMainTitle() or ""
       local finalsongtitle
 
         if getCurRateDisplayString() == "1.0xMusic" then
@@ -77,9 +77,9 @@ t[#t + 1] = Def.ActorFrame{
           self:settext(rawsongtitle .. plusstring .. ratestring)
         --Truncate song title if it exceeds 26 characters
         if self:GetZoomedWidth() > 425 then
-          finalsongtitle = string.sub(song:GetMainTitle(),1,26) .. "..."
+          finalsongtitle = string.sub(song ~= nil and song:GetMainTitle() or "",1,26) .. "..."
         else
-          finalsongtitle = song:GetMainTitle()
+          finalsongtitle = song ~= nil and song:GetMainTitle() or ""
         end
           self:settext(finalsongtitle .. plusstring .. ratestring)
           self:accelerate(0.15)
@@ -121,7 +121,7 @@ t[#t + 1] = Def.ActorFrame{
 
       ArtistTextCommand = function(self)
       local song = GAMESTATE:GetCurrentSong()
-      local songartist = song:GetDisplayArtist()
+      local songartist = song ~= nil and song:GetDisplayArtist() or ""
           self:finishtweening()
           self:diffusealpha(0)
           self:xy(16,56):halign(0):valign(0)
@@ -155,11 +155,12 @@ t[#t + 1] = Def.ActorFrame{
 
       BPMTextCommand = function(self)
       local song = GAMESTATE:GetCurrentSong()
-      local songartist = song:GetDisplayArtist()
+      local songartist = song ~= nil and song:GetDisplayArtist() or ""
+      local bpmtext = song ~= nil and "BPM" or ""
           self:finishtweening()
           self:xy(16+1,80):halign(0):valign(0)
           self:zoom(1)
-          self:settext("BPM")
+          self:settext(bpmtext)
           self:diffusealpha(.65)
       end,
 
@@ -189,7 +190,12 @@ t[#t + 1] = Def.ActorFrame{
 
       BPMNumbersCommand = function(self)
       local song = GAMESTATE:GetCurrentSong()
-      local songbpm = song:GetDisplayBpms()
+      local songbpm = song ~= nil and song:GetDisplayBpms() or {0,0}
+      if song == nil then
+          self:visible(false)
+      else
+          self:visible(true)
+      end
           self:finishtweening()
           self:diffusealpha(0)
           self:xy(48-9,80):halign(0):valign(0)

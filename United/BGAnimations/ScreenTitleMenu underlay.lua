@@ -33,4 +33,8 @@ t[#t + 1] =
 				self:effectmagnitude(60,0,0)
 			end
 	}
+
+--Discord integration
+GAMESTATE:UpdateDiscordPresence("player name here","Construction site","Main menu",0)
+
 return t

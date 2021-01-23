@@ -1,5 +1,8 @@
 --Chasing Midnight animations
 
+--Total time for background tile cycle
+local cycleTotal = 80
+
 local t = Def.ActorFrame{
 
 	Def.Quad{
@@ -49,6 +52,27 @@ local t = Def.ActorFrame{
 					self:sleep( oneBeat * 0.6)
 				end
 				self:queuecommand("Thump")
+		end
+	},
+
+	Def.Quad{
+		InitCommand=function(self)
+			self:diffuse(color("#FFFFFF"))
+			self:diffusealpha(0.4)
+			self:zoomto(480,240)
+			self:addrotationz(-45)
+			self:xy(0,240)
+		end,
+
+		OnCommand=function(self)
+			self:sleep(0.1)
+			self:queuecommand("Move")
+		end,
+
+		MoveCommand=function(self)
+			self:xy(0,240)
+			self:linear(cycleTotal)
+			self:xy(3000,-3000)
 		end
 	},
 }

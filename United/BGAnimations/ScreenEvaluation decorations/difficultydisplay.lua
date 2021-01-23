@@ -308,10 +308,11 @@ t[#t + 1] =
         local wv = score:GetWifeVers()
         local ws = "Wife" .. wv .. " J"
         local js = judge ~= 9 and judge or "ustice"
-        self:settextf(
-          "%05.2f%%", 
-          notShit.floor(score:GetWifeScore() * 100, 2)
-        )
+        if notShit.floor(score:GetWifeScore() * 100, 2) <= 0 then
+          self:settext("00.00%")
+        else
+          self:settextf("%05.2f%%", notShit.floor(score:GetWifeScore() * 100, 2))
+        end
       end,
       ScoreChangedMessageCommand = function(self)
         self:queuecommand("Set")
@@ -325,20 +326,27 @@ t[#t + 1] =
           judge = judge - 1
           clampJudge()
           rescorepercent = getRescoredWife3Judge(3, judge, rescoretable)
-          self:settextf(
-            "%05.2f%% (%s)", notShit.floor(rescorepercent, 2), ws .. judge
-          )
+
+          if notShit.floor(score:GetWifeScore() * 100, 2) <= 0 then
+            self:settext("00.00%")
+          else
+            self:settextf("%05.2f%% (%s)", notShit.floor(rescorepercent, 2), ws .. judge)
+          end
           MESSAGEMAN:Broadcast("RecalculateGraphs", {judge = judge})
+
         elseif params.Name == "NextJudge" and judge < 9 then
           judge = judge + 1
           clampJudge()
           rescorepercent = getRescoredWife3Judge(3, judge, rescoretable)
           local js = judge ~= 9 and judge or "ustice"
-            self:settextf(
-              "%05.2f%% (%s)", notShit.floor(rescorepercent, 2), ws .. js
-          )
+          if notShit.floor(score:GetWifeScore() * 100, 2) <= 0 then
+            self:settext("00.00%")
+          else
+            self:settextf("%05.2f%% (%s)", notShit.floor(rescorepercent, 2), ws .. js)
+          end
           MESSAGEMAN:Broadcast("RecalculateGraphs", {judge = judge})
         end
+
         if params.Name == "ResetJudge" then
           judge = GetTimingDifficulty()
           clampJudge()

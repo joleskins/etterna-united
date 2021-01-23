@@ -12,6 +12,7 @@ t[#t+1] = Def.Sprite {
 			local song = params.Song
 			local focus = params.HasFocus
 			local bnpath = nil
+			local pkpath = nil
 
 			if song then
 				bnpath = params.Song:GetBannerPath()
@@ -19,6 +20,16 @@ t[#t+1] = Def.Sprite {
 					bnpath = THEME:GetPathG("Common", "fallback wheelbanner")
 				end
 				self:Load(bnpath)
+				self:zoomto(120,60)
+			end
+
+			--This does nothing. Maybe I need a different file for this
+			if pack then
+				pkpath = SONGMAN:GetSongGroupBannerPath()
+				if not pkpath then
+					pkpath = THEME:GetPathG("Common", "fallback wheelbanner")
+				end
+				self:Load(pkpath)
 				self:zoomto(120,60)
 			end
 

@@ -114,4 +114,7 @@ for i=1,12 do
 		}
 end
 
+--Discord integration
+GAMESTATE:UpdateDiscordPresence("player name here","Construction site","Song select",0)
+
 return t
