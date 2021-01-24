@@ -227,58 +227,6 @@ t[#t + 1] =
           self:queuecommand("GetMSD")
           end
     },
---Hardcoded MSD (mockup, no functionality)
---Keeping this as a reference for how the MSD should look in the end
---[[t[#t + 1] =
-  LoadFont("_vikive bold 48px") ..
-    {
-      InitCommand=function(self)
-        self:uppercase(true):diffusealpha(1):halign(0):valign(0):xy(443-7,518):diffuse(color("#e3b22a"))
-      end,
-      OnCommand=function(self)
-        self:settext("1")
-      end
-  }
-t[#t + 1] =
-  LoadFont("_vikive bold 48px") ..
-    {
-      InitCommand=function(self)
-        self:uppercase(true):diffusealpha(1):halign(0):valign(0):xy(469-7,518):diffuse(color("#e3b22a"))
-      end,
-      OnCommand=function(self)
-        self:settext("4")
-      end
-  }
-t[#t + 1] =
-  LoadFont("_vikive bold 48px") ..
-    {
-      InitCommand=function(self)
-        self:uppercase(true):diffusealpha(1):halign(0):valign(0):xy(489-7,518):diffuse(color("#e3b22a"))
-      end,
-      OnCommand=function(self)
-        self:settext(".")
-      end
-  }
-t[#t + 1] =
-  LoadFont("_vikive bold 48px") ..
-    {
-      InitCommand=function(self)
-        self:uppercase(true):diffusealpha(1):halign(0):valign(0):xy(507-7,518):diffuse(color("#e3b22a"))
-      end,
-      OnCommand=function(self)
-        self:settext("6")
-      end
-  }
-t[#t + 1] =
-  LoadFont("_vikive bold 48px") ..
-    {
-      InitCommand=function(self)
-        self:uppercase(true):diffusealpha(1):halign(0):valign(0):xy(531-7,518):diffuse(color("#e3b22a"))
-      end,
-      OnCommand=function(self)
-        self:settext("1")
-      end
-  }--]]
 
 --SSR text 
   LoadFont("_raleway extrabold 12px") ..
@@ -291,7 +239,7 @@ t[#t + 1] =
       end
   },
 
---Old placeholder percent
+--Score percent
   LoadFont("_vikive bold 48px") ..
     {
       Name = "NormalText",
@@ -301,24 +249,30 @@ t[#t + 1] =
       end,
       BeginCommand = function(self)
         local score = SCOREMAN:GetMostRecentScore()
+        local scorePercent = score:GetWifeScore() * 100
         self:queuecommand("Set")
       end,
       SetCommand = function(self)
         local score = SCOREMAN:GetMostRecentScore()
+        local scorePercent = score:GetWifeScore() * 100
         local wv = score:GetWifeVers()
         local ws = "Wife" .. wv .. " J"
         local js = judge ~= 9 and judge or "ustice"
         if notShit.floor(score:GetWifeScore() * 100, 2) <= 0 then
           self:settext("00.00%")
+          self:diffuse(color("#686868"))
         else
           self:settextf("%05.2f%%", notShit.floor(score:GetWifeScore() * 100, 2))
+          self:diffuse(color(byGrade(scorePercent)))
         end
       end,
       ScoreChangedMessageCommand = function(self)
         self:queuecommand("Set")
       end,
       CodeMessageCommand = function(self, params)
+        local score = SCOREMAN:GetMostRecentScore()
         local rescoretable = getRescoreElements(pss, score)
+        local scorePercent = score:GetWifeScore() * 100
         local rescorepercent = 0
         local wv = score:GetWifeVers()
         local ws = "Wife3" .. " J"
@@ -329,8 +283,10 @@ t[#t + 1] =
 
           if notShit.floor(score:GetWifeScore() * 100, 2) <= 0 then
             self:settext("00.00%")
+            self:diffuse(color("#686868"))
           else
             self:settextf("%05.2f%% (%s)", notShit.floor(rescorepercent, 2), ws .. judge)
+            self:diffuse(color(byGrade(scorePercent)))
           end
           MESSAGEMAN:Broadcast("RecalculateGraphs", {judge = judge})
 
@@ -355,28 +311,6 @@ t[#t + 1] =
         end
       end
     }
-
---[[--Patterns(Skillsets title)
-  LoadFont("_raleway extrabold 16px") ..
-    {
-      InitCommand=function(self)
-        self:uppercase(false):diffusealpha(0.3):halign(0):valign(0):xy(16,64-2)
-      end,
-      OnCommand=function(self)
-        self:settext("Patterns")
-      end
-  },
-
---Patterns(Skillsets title)
-  LoadFont("_raleway semibold 16px") ..
-    {
-      InitCommand=function(self)
-        self:uppercase(false):diffusealpha(1):halign(0):valign(0):xy(16,88-2)
-      end,
-      OnCommand=function(self)
-        self:settext("Technical  Jumpstream  Stamina")
-      end
-  }--]]
 
 }
 return t

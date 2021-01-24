@@ -1105,7 +1105,7 @@ function NPSWindow()
 	setmetatable(t, t)
 	return t
 
-function HPToggle()
+--[[function HPToggle()
 	local t = {
 		Name = "HPToggle"
 		LayoutType = "ShowAllInRow",
@@ -1114,5 +1114,5 @@ function HPToggle()
 		ExportOnChange = true,
 		Choices = {"On", "Off"},
 		
-	}
+	}--]]
 end

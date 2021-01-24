@@ -140,7 +140,7 @@ t[#t + 1] =
       end
   }--]]
 
---Hard(not selected )
+--Hard(not selected)
   Def.Quad {
   Name="DiffFrameTopHard";
   InitCommand = function(self)
@@ -226,58 +226,6 @@ t[#t + 1] =
           self:queuecommand("GetMSD")
           end
     },
---Hardcoded MSD (mockup, no functionality)
---Keeping this as a reference for how the MSD should look in the end
---[[t[#t + 1] =
-  LoadFont("_vikive bold 48px") ..
-    {
-      InitCommand=function(self)
-        self:uppercase(true):diffusealpha(1):halign(0):valign(0):xy(443-7,518):diffuse(color("#e3b22a"))
-      end,
-      OnCommand=function(self)
-        self:settext("1")
-      end
-  }
-t[#t + 1] =
-  LoadFont("_vikive bold 48px") ..
-    {
-      InitCommand=function(self)
-        self:uppercase(true):diffusealpha(1):halign(0):valign(0):xy(469-7,518):diffuse(color("#e3b22a"))
-      end,
-      OnCommand=function(self)
-        self:settext("4")
-      end
-  }
-t[#t + 1] =
-  LoadFont("_vikive bold 48px") ..
-    {
-      InitCommand=function(self)
-        self:uppercase(true):diffusealpha(1):halign(0):valign(0):xy(489-7,518):diffuse(color("#e3b22a"))
-      end,
-      OnCommand=function(self)
-        self:settext(".")
-      end
-  }
-t[#t + 1] =
-  LoadFont("_vikive bold 48px") ..
-    {
-      InitCommand=function(self)
-        self:uppercase(true):diffusealpha(1):halign(0):valign(0):xy(507-7,518):diffuse(color("#e3b22a"))
-      end,
-      OnCommand=function(self)
-        self:settext("6")
-      end
-  }
-t[#t + 1] =
-  LoadFont("_vikive bold 48px") ..
-    {
-      InitCommand=function(self)
-        self:uppercase(true):diffusealpha(1):halign(0):valign(0):xy(531-7,518):diffuse(color("#e3b22a"))
-      end,
-      OnCommand=function(self)
-        self:settext("1")
-      end
-  }--]]
 
 --MSD text 
   LoadFont("_raleway extrabold 12px") ..
