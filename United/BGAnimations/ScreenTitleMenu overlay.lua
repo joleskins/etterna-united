@@ -9,46 +9,38 @@ end
 
 --Define list of song files
 titleSongList = {
-	"chasingmidnight",	 -- Moog - Chasing Midnight (feat. Erin Renee)
-	"everythingbang",	 -- Moog - Everything Bang
-	"forcedinduction",	 -- Moog - Forced Induction
-	"horizons",			 -- Moog - Horizons feat. Erin Renee
-	"iwillfindyou",		 -- Moog - I Will Find You (feat. ALPHAMAMA)
-	"liftmeup",			 -- Moog - Lift Me Up (feat. 7skies)
-	"transformer"		 -- Moog - Transformer
+	"berzerker",	 	-- WATEVA - Ber Zer Ker (Rob Gasser Remix)
+	"freefall",			-- Arlow - Freefall
+	"humanity",			-- Max Brhon - Humanity
+	"imhere",			-- HYLO x Disfigure - I'm Here
+	"venus"				-- Michael White - Venus (feat. MYLK)
 	}
 
 --Define metadata for list of songs (make sure to keep the same order for both tables)
 local metadataList = {
-	"Moog - Chasing Midnight (feat. Erin Renee)",
-	"Moog - Everything Bang",
-	"Moog - Forced Induction",
-	"Moog - Horizons feat. Erin Renee",
-	"Moog - I Will Find You (feat. ALPHAMAMA)",
-	"Moog - Lift Me Up (feat. 7skies)",
-	"Moog - Transformer"
+	"WATEVA - Ber Zer Ker (Rob Gasser Remix)",
+	"Arlow - Freefall",
+	"Max Brhon - Humanity",
+	"HYLO x Disfigure - I'm Here",
+	"Michael White - Venus (feat. MYLK)"
 }
 
 --Define BPMs of songs (will be used later)
 titleSongBPMs = {
-	120,	-- Moog - Chasing Midnight (feat. Erin Renee)
-	125,	-- Moog - Everything Bang
-	128,	-- Moog - Forced Induction
-	128,	-- Moog - Horizons feat. Erin Renee
-	135,	-- Moog - I Will Find You (feat. ALPHAMAMA)
-	128,	-- Moog - Lift Me Up (feat. 7skies)
-	128		-- Moog - Transformer
+	174,	-- WATEVA - Ber Zer Ker (Rob Gasser Remix)
+	174,	-- Arlow - Freefall
+	110,	-- Max Brhon - Humanity
+	160,	-- HYLO x Disfigure - I'm Here
+	128		-- Michael White - Venus (feat. MYLK)
 }
 
 titleSongTotalBeats = {
-	--Not double checked yet
-	160,	-- Moog - Chasing Midnight (feat. Erin Renee)
-	192,	-- Moog - Everything Bang
-	272,	-- Moog - Forced Induction
-	260,	-- Moog - Horizons feat. Erin Renee
-	256,	-- Moog - I Will Find You (feat. ALPHAMAMA)
-	176,	-- Moog - Lift Me Up (feat. 7skies)
-	96		-- Moog - Transformer
+	--Not double checked yet. Likely a bit off
+	190,	-- WATEVA - Ber Zer Ker (Rob Gasser Remix)
+	272,	-- Arlow - Freefall
+	160,	-- Max Brhon - Humanity
+	192,	-- HYLO x Disfigure - I'm Here
+	192		-- Michael White - Venus (feat. MYLK)
 }
 
 --titleSongBeatCount variable used later for counting beats

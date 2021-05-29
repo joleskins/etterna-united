@@ -1,5 +1,5 @@
 -- Colorized stuff
-function byMSD(x)
+function byDifficulty(x)
 	if x < 20 then
 		return HSV(47,.96,.96)
 

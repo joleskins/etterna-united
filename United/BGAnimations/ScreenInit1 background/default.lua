@@ -25,7 +25,7 @@ t[#t + 1] =
 				self:FullScreen():diffusealpha(1):xy(0,0):diffuse(color("#000000"))
 			end
 		},
-		LoadActor(THEME:GetPathG("","Common splash")) ..
+		LoadActor(THEME:GetPathG("","Logo/big" .. tostring(math.random(1,6)))) ..
 			{
 				OnCommand = function(self)
 					self:diffusealpha(0):sleep(0.5):linear(0.3):diffusealpha(1):sleep(3.5):linear(0.3):diffusealpha(0)

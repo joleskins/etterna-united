@@ -29,7 +29,7 @@ t[#t + 1] =
 					self:diffuse(color("1,1,1,1")):linear(0.3):diffusealpha(1)
 				end
 			},
-		LoadActor(THEME:GetPathG("","moog")) ..
+		LoadActor(THEME:GetPathG("","nocopyrightsounds")) ..
 			{
 				OnCommand = function(self)
 					self:addy(75):diffusealpha(0):sleep(1):linear(0.3):diffusealpha(1):sleep(3.5):linear(0.3):diffusealpha(0)
